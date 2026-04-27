@@ -52,6 +52,14 @@ You can also run the simulation script directly:
 uv run python brownian_motion_sim.py
 ```
 
+The direct script entry point supports command-line arguments for the main simulation settings:
+
+```bash
+uv run python brownian_motion_sim.py --points 2000 --paths 100 --seed 7 --output-dir figures
+```
+
+Available options include `--points`, `--paths`, `--interval_start`, `--interval_end`, `--seed`, and `--output-dir`.
+
 ## Project Goal
 
 This project explores:
@@ -62,6 +70,6 @@ This project explores:
 
 ## Possible Next Steps
 
-- expose simulation parameters through command-line arguments
+- add input validation for command-line arguments
 - add tests for simulation shapes and reproducibility
 - compare empirical terminal distributions with theoretical results

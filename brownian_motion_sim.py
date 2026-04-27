@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
+import argparse
 
 @dataclass(frozen=True)
 class SimulationConfig:
@@ -18,6 +19,26 @@ class SimulationConfig:
     seed: int = 42
     output_dir: Path = Path("figures")
 
+def parse_args() -> SimulationConfig:
+    parser = argparse.ArgumentParser(
+        description = "Brownian motion simulation",
+    )
+    parser.add_argument("--points", type = int, default = 1000)
+    parser.add_argument("--paths", type = int, default = 50)
+    parser.add_argument("--interval_start", type = float, default = 0.0)
+    parser.add_argument("--interval_end", type = float, default = 1.0)
+    parser.add_argument("--seed", type = int, default = 42)
+    parser.add_argument("--output-dir", type = Path, default = Path("figures"))
+
+    args = parser.parse_args()
+    return SimulationConfig(
+        points = args.points,
+        paths = args.paths,
+        interval_start = args.interval_start,
+        interval_end = args.interval_end,
+        seed = args.seed,
+        output_dir = args.output_dir
+    )
 
 def build_time_axis(config: SimulationConfig) -> tuple[np.ndarray, float]:
     time_axis = np.linspace(config.interval_start, config.interval_end, config.points)
@@ -85,7 +106,7 @@ def plot_terminal_distribution(final_values: np.ndarray, output_path: Path) -> N
 
 
 def main() -> None:
-    config = SimulationConfig()
+    config = parse_args()
     time_axis, dt = build_time_axis(config)
     noise = sample_noise(config)
     config.output_dir.mkdir(parents=True, exist_ok=True)
