@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A lightweight project page for a Python Brownian motion simulator with sample paths, drift, and terminal distribution visualizations."
+    >
+    <title>Brownian Motion Simulator</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <main>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="brand" href="#top">Brownian Motion Simulator</a>
+        <div class="nav-links">
+          <a href="#figures">Figures</a>
+          <a href="#method">Method</a>
+          <a href="#run">Run</a>
+          <a href="https://github.com/OthmaneZ05/brownian-motion-simulator">GitHub</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">Python &middot; NumPy &middot; stochastic processes</p>
+          <h1>Brownian motion simulator for stochastic paths.</h1>
+          <p class="hero-text">
+            A compact scientific Python project that generates Brownian sample paths,
+            compares standard and drifted dynamics, and visualizes the terminal value
+            distribution.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/OthmaneZ05/brownian-motion-simulator">
+              View source
+            </a>
+            <a class="button secondary" href="#figures">See figures</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Animated Brownian motion paths">
+          <canvas id="brownian-canvas"></canvas>
+        </div>
+      </section>
+
+      <section class="summary" aria-label="Project summary">
+        <div class="summary-item">
+          <span>1,000</span>
+          <p>time points over a normalized interval</p>
+        </div>
+        <div class="summary-item">
+          <span>50</span>
+          <p>sample paths generated from seeded noise</p>
+        </div>
+        <div class="summary-item">
+          <span>3</span>
+          <p>saved figures for paths, drift, and terminal density</p>
+        </div>
+      </section>
+
+      <section class="section intro">
+        <div>
+          <p class="eyebrow">Project focus</p>
+          <h2>A small quant-oriented simulation, presented plainly.</h2>
+        </div>
+        <p>
+          The repository emphasizes reproducible numerical simulation, clear plotting,
+          and a readable implementation. It is intentionally narrow: build the time grid,
+          sample Gaussian noise, accumulate Brownian increments, then save figures that
+          make the process visible.
+        </p>
+      </section>
+
+      <section class="section" id="figures">
+        <div class="section-heading">
+          <p class="eyebrow">Generated outputs</p>
+          <h2>The simulation results are the main interface.</h2>
+        </div>
+
+        <div class="figure-grid">
+          <figure class="figure-card wide">
+            <img
+              src="figures/standard_brownian_motion_paths.png"
+              alt="Standard Brownian motion sample paths"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Standard Brownian motion</strong>
+              <span>Sample paths start from zero and diverge through accumulated Gaussian increments.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="figure-card">
+            <img
+              src="figures/standard_brownian_motion_terminal_distribution.png"
+              alt="Kernel density estimate of Brownian terminal values"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Terminal distribution</strong>
+              <span>A kernel density estimate summarizes the final values across simulated paths.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="figure-card">
+            <img
+              src="figures/brownian_motion_with_drift_paths.png"
+              alt="Brownian motion with drift sample paths"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Brownian motion with drift</strong>
+              <span>Adding drift and diffusion shifts the trajectory behavior while preserving stochastic variation.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="method" id="method">
+        <div class="method-copy">
+          <p class="eyebrow">Implementation</p>
+          <h2>Simple construction, visible assumptions.</h2>
+          <p>
+            The code uses a seeded NumPy generator, builds a uniform time axis, and
+            accumulates increments. The drifted process follows the same structure with
+            explicit drift and diffusion parameters.
+          </p>
+        </div>
+
+        <div class="formula-panel">
+          <div class="formula-row">
+            <span>Standard</span>
+            <code>W(t + dt) = W(t) + sqrt(dt) &middot; Z</code>
+          </div>
+          <div class="formula-row">
+            <span>With drift</span>
+            <code>X(t + dt) = X(t) + &mu;dt + &sigma;sqrt(dt) &middot; Z</code>
+          </div>
+          <div class="formula-row">
+            <span>Noise</span>
+            <code>Z ~ N(0, 1)</code>
+          </div>
+        </div>
+      </section>
+
+      <section class="run-panel" id="run">
+        <div>
+          <p class="eyebrow">Run locally</p>
+          <h2>Generate the figures from the command line.</h2>
+        </div>
+        <pre><code>uv sync
+uv run python main.py
+
+uv run python brownian_motion_sim.py --points 2000 --paths 100 --seed 7 --output-dir figures</code></pre>
+      </section>
+
+      <footer class="site-footer">
+        <p>Built as a lightweight GitHub Pages project page for the Brownian Motion Simulator repository.</p>
+        <a href="https://github.com/OthmaneZ05/brownian-motion-simulator">github.com/OthmaneZ05/brownian-motion-simulator</a>
+      </footer>
+    </main>
+
+    <script src="assets/site.js"></script>
+  </body>
+</html>

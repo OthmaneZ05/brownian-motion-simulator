@@ -7,6 +7,12 @@ The repository currently includes:
 - a Brownian motion with drift simulation
 - visualizations for sample paths and terminal value distribution
 
+## Project Page
+
+This repository includes a lightweight static project page in `index.html`.
+It can be served directly by GitHub Pages from the repository root, with no
+frontend build step required.
+
 ## Preview
 
 ### Standard Brownian Motion Sample Paths
